@@ -9,17 +9,19 @@ class MainScreen(Screen):
     def __init__(self, **kwargs):
         super(MainScreen, self).__init__(**kwargs)
         
-        # Set background color to dark blue
-        self.background_color = "[0.05, 0.10, 0.8, 1]"
+        # Set background color to a darker shade of blue
+        self.background_color = (0.05, 0.10, 0.6, 1)
         
-        # Create a vertical box layout
-        self.layout = BoxLayout(orientation='vertical', spacing=10, padding=100)
+        # Create a vertical box layout with padding and spacing
+        self.layout = BoxLayout(orientation='vertical', spacing=20, padding=60)
         
-        # Add a label with light blue text and Montserrat Extra Bold font
-        self.label = Label(text='Gaussian', color=[0.53, 0.81, 0.92, 1], font_size=60, font_name='Montserrat-limited/Montserrat-ExtraBold.ttf')
+        # Add a label with white text and a modern font
+        self.label = Label(text='GAUSSIAN', color=[1,1,1,1], font_size=60, font_name='Montserrat-limited/Montserrat-ExtraBold.ttf')
 
-        # Add a button with a light blue background and white text
-        self.sign_up_button = Button(text='Sign Up', background_color=[0.53, 0.81, 0.92, 1], color=[1, 1, 1, 1], font_size=30, bold=True, size_hint=(None, None), size=(300, 80), pos_hint={'center_x': 0.5, 'center_y': 0.5})
+        # Add a button with white text and a gradient background
+        self.sign_up_button = Button(text='Sign Up', size_hint=(0.4, 0.4), pos_hint={'center_x': 0.5},
+                                     background_normal='picture.png', background_down='picture.png',
+                                     font_size=30, font_name='Montserrat-limited/Montserrat-ExtraBold.ttf', bold=True)
 
         # Bind button press to sign_up method
         self.sign_up_button.bind(on_press=self.sign_up)

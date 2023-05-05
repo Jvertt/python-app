@@ -10,19 +10,21 @@ class UserProfileScreen(Screen):
     def __init__(self, **kwargs):
         super(UserProfileScreen, self).__init__(**kwargs)
 
-        self.layout = BoxLayout(orientation='vertical', spacing=25, size_hint=(0.8, 0.9), pos_hint={'center_x': 0.5, 'center_y': 0.5})
+        self.layout = BoxLayout(orientation='vertical', spacing=30, size_hint=(0.5, 0.8), pos_hint={'center_x': 0.5, 'center_y': 0.5})
         self.label = Label(text='User Profile', font_size=80, font_name='Montserrat-limited/Montserrat-ExtraBold.ttf')
 
         # Customizable TextInputs
-        self.text_input1 = TextInput(hint_text='Name', background_color=[1, 1, 1, 1])
-        self.text_input2 = TextInput(hint_text='Username', background_color=[1, 1, 1, 1])
-        self.text_input3 = TextInput(hint_text='Email', background_color=[1, 1, 1, 1])
-        self.text_input4 = TextInput(hint_text='Interest', background_color=[1, 1, 1, 1])
-        self.text_input5 = TextInput(hint_text='City', background_color=[1, 1, 1, 1])
+        self.text_input1 = TextInput(hint_text='Name', background_color=[1, 1, 1, 1], font_name='Montserrat-limited/Montserrat-ExtraBold.ttf', halign='left')
+        self.text_input2 = TextInput(hint_text='Username', background_color=[1, 1, 1, 1], font_name='Montserrat-limited/Montserrat-ExtraBold.ttf', halign='left')
+        self.text_input3 = TextInput(hint_text='Email', background_color=[1, 1, 1, 1], font_name='Montserrat-limited/Montserrat-ExtraBold.ttf', halign='left')
+        self.text_input4 = TextInput(hint_text='Interest', background_color=[1, 1, 1, 1], font_name='Montserrat-limited/Montserrat-ExtraBold.ttf', halign='left')
+        self.text_input5 = TextInput(hint_text='City', background_color=[1, 1, 1, 1], font_name='Montserrat-limited/Montserrat-ExtraBold.ttf', halign='left')
+
         # End Customizable TextInputs
 
-        self.update_button = Button(text='Update', on_press=self.update_profile, size_hint=(0.55, 0.55), pos_hint={'center_x': 0.5})
+        self.update_button = Button(text='Update',background_normal='picture.png', background_down='picture.png',on_press=self.update_profile , size_hint=(0.9, 0.9), pos_hint={'center_x': 0.5})
         
+
         # Add all widgets to layout
         self.layout.add_widget(self.label)
         self.layout.add_widget(self.text_input1)

@@ -34,7 +34,10 @@ class SignUpScreen(Screen):
         self.layout.add_widget(self.text_input4)
         self.layout.add_widget(self.text_input5)
         self.layout.add_widget(self.text_input6)
-        self.submit_button = Button(text='Submit', on_press=self.submit_form, size_hint=(0.55, 0.55), pos_hint={'center_x': 0.5})
+        
+        # Set the background image of the button and adjust its size
+        self.submit_button = Button(text='Submit', on_press=self.submit_form, size_hint=(None, None), size=(600, 300), pos_hint={'center_x': 0.5}, font_size=50)
+        self.submit_button.background_normal = 'picture.png'
         self.layout.add_widget(self.submit_button)
         self.add_widget(self.layout)
 

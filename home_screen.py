@@ -12,13 +12,9 @@ from kivy.uix.floatlayout import FloatLayout
 from scrpy import scrape_and_process
 from scrpy import *
 
+
 Builder.load_string('''
 <HomeScreen>:
-    float_layout: float_layout
-    layout: layout
-    label: label
-    text_input1: text_input1
-    profile_button: profile_button
 
     FloatLayout:
         id: float_layout
@@ -38,23 +34,30 @@ Builder.load_string('''
                 id: text_input1
                 hint_text: 'Widget 1'
 
-            Button:
-                id: run_button
-                text: 'Run scrpy.py'
-                on_press: root.run_scrape_and_process()
-
-        Button:
-            id: profile_button
-            background_normal: 'profile.png'
-            background_down: 'profile.png'
-            size: 130, 130
+        BoxLayout:
             size_hint: None, None
+            size: 130, 130
             pos_hint: {'top': 1, 'right': 1}
-            on_press: root.go_to_profile()
 
-# define the ProfileScreen class here
+            Button:
+                id: profile_button
+                background_normal: 'profile.png'
+                background_down: 'profile.png'
+                size_hint: None, None
+                size: 130, 130
+                on_press: root.go_to_profile()
+
+<ProfileScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: 'Profile Screen'
+        Button:
+            text: 'Go back home'
+            on_press: root.go_back_home()
 
 ''')
+
 
 class HomeScreen(Screen):
     def __init__(self, **kwargs):
@@ -70,7 +73,6 @@ class HomeScreen(Screen):
         self.text_input1 = TextInput(hint_text='Widget 1')
         self.layout.add_widget(self.text_input1)
 
-
         # End Customizable Widgets
 
         self.float_layout.add_widget(self.layout)
@@ -81,18 +83,14 @@ class HomeScreen(Screen):
         self.float_layout.add_widget(self.profile_button)
 
         # add the new button to run scrape_and_process()
-        self.scrape_button = Button(text='run', on_press=self.run_scrape_and_process, size_hint=(0.4, 0.1), pos_hint={'center_x': 0.5, 'center_y': 0.4})
+        self.scrape_button = Button(text='run', on_press=self.run_scrape_and_process, size_hint=(0.4, 0.4), 
+                            pos_hint={'center_x': 0.5, 'center_y': 0.4}, 
+                            background_normal='picture.png', background_down='picture.png',
+                            color=[1,1,1,1])
+
         self.layout.add_widget(self.scrape_button)
 
         self.add_widget(self.float_layout)
-
-        self.add_widget(Builder.load_string('''
-BoxLayout:
-    orientation: 'vertical'
-    size_hint: 0.8, 0.8
-    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-
-'''))
 
     def go_to_profile(self, *args):
         self.manager.current = 'profile'
@@ -103,11 +101,15 @@ BoxLayout:
 
     # access the "Stocks" summary from the dictionary
         stocks_summary = category_summaries["Stocks"]
+        laws_summary = category_summaries["US Laws"]
+        companies_summary = category_summaries["Companies"]
+        news_summary = category_summaries["News"]
 
     # update the text of the text_input1 widget with the resulting text
-        self.text_input1.text = stocks_summary
-
-
+        self.text_input1.text = 'stocks:\n{}\n\nlaws:\n{}\n\ncompanies:\n{}\n\nnews:\n{}'.format(stocks_summary, 
+                                                                                            laws_summary, 
+                                                                                            companies_summary, 
+                                                                                            news_summary)
 
 class ProfileScreen(Screen):
     pass
@@ -121,4 +123,3 @@ class MyApp(App):
 
 if __name__ == '__main__':
     MyApp().run()
-
